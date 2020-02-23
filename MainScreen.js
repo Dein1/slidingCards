@@ -54,19 +54,6 @@ export class MainScreen extends React.Component {
           const offset = this.state.onTop ? SHOWN_POSITION : HIDDEN_POSITION;
           this.scrollY.setValue(gestureState.dy + offset);
         }
-        // TODO: починить
-        // if (this.state.onTop && gestureState.dy >= MAXIMUM_SCROLL_DISTANCE) {
-        //    this.setState({
-        //      onTop: false,
-        //    });
-        // } else if (
-        //   !this.state.onTop &&
-        //   gestureState.dy <= -MAXIMUM_SCROLL_DISTANCE
-        // ) {
-        //    this.setState({
-        //      onTop: true,
-        //    });
-        // }
       },
       onPanResponderRelease: (evt, gestureState) => {
         if (this.state.onTop && gestureState.dy >= SCROLLED_ENOUGH_TO_SLIDE) {
@@ -177,24 +164,21 @@ export class MainScreen extends React.Component {
       <View style={styles.container} {...this._panResponder.panHandlers}>
         <Animated.View style={[styles.cardContainer, this.topCardTranslate]}>
           <Image source={require('./credit_card.png')} style={styles.card} />
-          {this.state.onTop ? (
-            <Animated.Text
-              style={[
-                styles.cardType,
-                styles.topCardType,
-                this.topCardTypeOpacity,
-              ]}>
-              {'Virtual card'}
-            </Animated.Text>
-          ) : (
-            <Animated.Text
-              style={[styles.description, this.topCardDescription]}
-              numberOfLines={2}>
-              {
-                "This is your virtual card. It's \n like a physical card, but virtual"
-              }
-            </Animated.Text>
-          )}
+          <Animated.Text
+            style={[
+              styles.cardType,
+              styles.topCardType,
+              this.topCardTypeOpacity,
+            ]}>
+            {'Virtual card'}
+          </Animated.Text>
+          <Animated.Text
+            style={[styles.description, this.topCardDescription]}
+            numberOfLines={2}>
+            {
+              "This is your virtual card. It's \n like a physical card, but virtual"
+            }
+          </Animated.Text>
         </Animated.View>
         <Animated.View style={[styles.cardContainer, this.bottomCardTranslate]}>
           <Animated.Text
@@ -237,10 +221,12 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
   bottomCardType: {
-    marginBottom: 16,
+    position: 'absolute',
+    top: -32,
   },
   topCardType: {
-    marginTop: 16,
+    position: 'absolute',
+    bottom: 0,
   },
   cardType: {
     fontSize: 15,
