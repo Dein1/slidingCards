@@ -14,6 +14,7 @@ const SCROLLED_ENOUGH_TO_SLIDE = 85;
 const SHOWN_POSITION = WINDOW_HEIGHT / 3.5;
 const HIDDEN_POSITION = WINDOW_HEIGHT - CARD.HEIGHT / 2;
 const MAXIMUM_SCROLL_DISTANCE = HIDDEN_POSITION - SHOWN_POSITION;
+const SPEED_RATIO = 0.7;
 
 export class MainScreen extends React.Component {
   state = {
@@ -46,13 +47,13 @@ export class MainScreen extends React.Component {
         if (
           (!this.state.onTop &&
             gestureState.dy <= 0 &&
-            gestureState.dy >= -MAXIMUM_SCROLL_DISTANCE) ||
+            gestureState.dy >= -MAXIMUM_SCROLL_DISTANCE / SPEED_RATIO) ||
           (this.state.onTop &&
             gestureState.dy >= 0 &&
-            gestureState.dy <= MAXIMUM_SCROLL_DISTANCE)
+            gestureState.dy <= MAXIMUM_SCROLL_DISTANCE / SPEED_RATIO)
         ) {
           const offset = this.state.onTop ? SHOWN_POSITION : HIDDEN_POSITION;
-          this.scrollY.setValue(gestureState.dy + offset);
+          this.scrollY.setValue(gestureState.dy * SPEED_RATIO + offset);
         }
       },
       onPanResponderRelease: (evt, gestureState) => {
