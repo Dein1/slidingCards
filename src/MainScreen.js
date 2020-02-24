@@ -8,6 +8,8 @@ import {
   Image,
 } from 'react-native';
 
+const cardImage = require('../assets/credit_card.png');
+
 const WINDOW = Dimensions.get('window');
 const CARD_WIDTH = WINDOW.width * 0.7;
 const CARD_HEIGHT = CARD_WIDTH / 1.7;
@@ -144,7 +146,7 @@ export class MainScreen extends React.Component {
     return (
       <View style={styles.container} {...this.panResponder.panHandlers}>
         <Animated.View style={[styles.cardContainer, this.topCardTranslate]}>
-          <Image source={require('../credit_card.png')} style={styles.card} />
+          <Image source={cardImage} style={styles.card} />
           <Animated.Text
             style={[
               styles.cardType,
@@ -170,7 +172,7 @@ export class MainScreen extends React.Component {
             ]}>
             {'Physical card'}
           </Animated.Text>
-          <Image source={require('../credit_card.png')} style={styles.card} />
+          <Image source={cardImage} style={styles.card} />
           <Animated.Text
             style={[styles.description, this.bottomCardDescriptionAnimation]}
             numberOfLines={2}>
