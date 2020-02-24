@@ -9,6 +9,6 @@ yarn install
 ## Run
 
 ```
-yarn ios
-yarn android
+npx react-native run-ios
+npx react-native run-android
 ```
